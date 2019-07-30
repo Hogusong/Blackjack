@@ -58,6 +58,15 @@ function init() {
         dView.renderInit(dealer.getOnHand());   // Render dealer's 2 cards 
         pView.renderCards(players);       // Render initial 2 cards for all players
         checkBlackjack();         // If dealer has blackjack, game will be over.
+
+        // Dealer has no blackjack but some players may have.
+        if (ctrl.countInPlayer() > 0) {
+          // Every hands will have four choice buttons: Split, Double, Hit, and Stay.
+          // Events were added to the buttons for each player and the game started. 
+          // currIndex is needed to notify whose buttons are active currently.
+          currIndex = players.findIndex(p => p.getCanDraw());
+          setButtonsAndPlay();              
+        } else timer = setTimeout(() => init(), delayTime)  // Show the result for 3 seconds.
       }
     }
   }
@@ -145,3 +154,5 @@ function updatePlayers() {
     }
   })
 }
+
+function setButtonsAndPlay() {}
