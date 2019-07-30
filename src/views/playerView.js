@@ -61,3 +61,8 @@ function renderCard(card) {
     </div>
   `
 }
+
+// To display each player's game situation.
+export const playerMSG = (id, msg) => {
+  document.getElementById(id).innerText = msg;
+}

@@ -52,6 +52,7 @@ function init() {
       initialDraw()             // Draw 2 cards for dealer and all in-play players
       dView.renderInit(dealer.getOnHand());   // Render dealer's 2 cards 
       pView.renderCards(players);       // Render initial 2 cards for all players
+      checkBlackjack();         // If dealer has blackjack, game will be over.
     }
   }
 
@@ -100,4 +101,41 @@ function drawCard(player) {
   if (!player.getInPlay()) return;
   const card = cards.pop();
   player.addOnHand(card);      // Add the drawn card to the player's hand.
+}
+
+function checkBlackjack() {
+  if (dealer.hasBlackjack()) {    // Dealer has a blackjack. Game is over. 
+    players.forEach((p, i) => {
+      if (p.hasBlackjack()) p.evenHand();   // Player has a blackjack, so even.
+      else {
+        gameResult[i] = -1;   // -1 means player lost this hand.
+        p.looseHand();        // Player does not have a blackjack, so loose.
+      }
+    })
+    updatePlayers();          // Update the game result to the playerBase (origin)
+    message('Game over. Dealer has Blackjsck.');
+  } else {                        // Dealer does not have a blackjack. Continue the game.
+    players.forEach((p,i) => {
+      if (p.hasBlackjack()) {    // Player has a blackjack, so win.
+        p.blackjack();
+        gameResult[i] = 1;
+        pView.playerMSG('msg-' + i, p.getPrevResult());
+      }
+    });
+  }
+}
+
+function updatePlayers() {
+  players.forEach((p, index) => {
+    const i = playersBase.findIndex(pb => pb.getName() === p.getName());
+    if (i >= 0) {
+      if (gameResult[index] > 0) {          // Player won this hand.
+        playersBase[i].setAmount(p.getBetting());
+      } else if (gameResult[index] < 0) {   // Player lost this hand.
+        playersBase[i].setAmount(-p.getBetting());
+      }
+      playersBase[i].setPrevResult(p.getPrevResult());
+      playersBase[i].setInitPlayer();
+    }
+  })
 }
