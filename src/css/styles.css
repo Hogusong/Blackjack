@@ -46,3 +46,48 @@ th, td {
 table a {
   color: red
 }
+
+.icard {
+  height: 150px;
+  width: 110px;
+  padding: 5px;
+  border: 1px solid black;
+  background: white;
+  border-radius: 10px;
+  display: inline-block;
+  font-family: 'Lato';
+}
+
+.card-back {
+  background: lightslategrey;
+  padding: 2px;
+}
+
+.top-card {
+  font-size: 25px;
+  line-height: 20px;
+  left: 2px;
+  top: 2px;
+}
+
+.content-card {
+  text-align: center;
+  font-size: 60px;
+}
+
+.bottom-card {
+  font-size: 25px;
+  line-height: 20px;
+  right: 2px;
+  bottom: 2px;
+  transform: rotate(-180deg);
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+}
+
+.hearts, .diams {  color: red;  }
+.hearts .suit::after {  content: '\2665'  }
+.spades .suit::after {  content: '\2660'  }
+.clubs .suit::after {  content: '\2663'  }
+.diams .suit::after {  content: '\2666'  }

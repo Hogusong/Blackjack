@@ -4,6 +4,7 @@ import * as ctrl from './controller/player';
 import * as base from './models/base';
 import { dom, message } from './models/base';
 import { settingPlayer } from './views/initialView';
+import * as dView from './views/dealerView';
 
 let playersBase = ctrl.createPlayers();     // Get players' infomation from the LocalStorage.
 let players = [], currIndex = -1, timer, delayTime = 3000;
@@ -48,8 +49,7 @@ function init() {
       gameResult = players.map(p => 0);   // 0 means pending or tie.
       gameStarted = true;       // Set the status in-game mode.
       initialDraw()             // Draw 2 cards for dealer and all in-play players
-      console.log(players);
-      console.log(dealer);
+      dView.renderInit(dealer.getOnHand());   // Render dealer's 2 cards 
     }
   }
 
