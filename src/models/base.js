@@ -68,3 +68,10 @@ function mixCards(A, B) {
   }
   return [...result];
 }
+
+// Handle all messages. Show the message for 2 seconds.
+export const message = (msg) => {
+  dom.message.innerText = msg;
+  dom.message.style.color = 'red'
+  setTimeout(() => dom.message.style.color = 'white', 2000);
+}
