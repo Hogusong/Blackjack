@@ -60,7 +60,7 @@ function init() {
         checkBlackjack();         // If dealer has blackjack, game will be over.
 
         // Dealer has no blackjack but some players may have.
-        if (ctrl.countInPlayer() > 0) {
+        if (ctrl.countInPlayer(players) > 0) {
           // Every hands will have four choice buttons: Split, Double, Hit, and Stay.
           // Events were added to the buttons for each player and the game started. 
           // currIndex is needed to notify whose buttons are active currently.
@@ -155,4 +155,24 @@ function updatePlayers() {
   })
 }
 
-function setButtonsAndPlay() {}
+function setButtonsAndPlay() {
+  const double = document.querySelectorAll('.double');
+  double.forEach(d => {
+    const i = d.dataset.id;
+    d.addEventListener('click', () => {
+      if (currIndex == i) {       // Activate this event when currIndex == player's ID
+        if (players[i].getOnHand().length != 2) {
+          message('DOUBLE is allowed when only 2 cards are on hand.')
+        } else {
+          players[i].setBetting(players[i].getBetting() * 2); // Reset betAmt double.
+          players[i].setPrevResult('Player made double betting!');
+          players[i].setCanDraw(false);
+          drawCard(players[i]);         // Draw one card for the current player.
+          pView.renderPlayerScore(players[i], i);
+          pView.renderLastCard(players[i].lastCard(), i);
+          pView.playerMSG('msg-' + i, 'Player made double betting!');
+        }
+      }
+    })
+  })
+}
