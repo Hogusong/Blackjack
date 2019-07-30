@@ -200,6 +200,9 @@ function setButtonsAndPlay() {
           pView.renderPlayerScore(players[i], i);
           pView.renderLastCard(players[i].lastCard(), i);
           pView.playerMSG('msg-' + i, 'Player made double betting!');
+          currIndex = players.findIndex(p => p.getCanDraw());   // Move to the next hand.
+          // If this was the last player on table, then open dealer's card.
+          if (currIndex < 0) drawDealerCards(); 
         }
       }
     })
@@ -222,8 +225,28 @@ function setButtonsAndPlay() {
           players[i].looseHand();
           gameResult[i] = -1;
           pView.playerMSG('msg-' + i, 'Player lost this hand!');
+          currIndex = players.findIndex(p => p.getCanDraw());   // Move to the next hand.
+          // If this was the last player on table, then open dealer's card.
+          if (currIndex < 0) drawDealerCards(); 
         }
       }
     })
   })
+  
+  const stay = document.querySelectorAll('.stay');
+  stay.forEach(s => {
+    const i = s.dataset.id;
+    s.addEventListener('click', () => {
+      if (currIndex == i) {       // Activate this event when currIndex == player's ID
+        players[i].setCanDraw(false);
+        players[i].setPrevResult('Player stay with current score!')
+        pView.playerMSG('msg-' + i, 'Player stay with current score!')
+        currIndex = players.findIndex(p => p.getCanDraw());   // Move to the next hand.
+        // If this was the last player on table, then open dealer's card.
+        if (currIndex < 0) drawDealerCards(); 
+      }
+    })
+  })
 }
+
+function drawDealerCards() {}
