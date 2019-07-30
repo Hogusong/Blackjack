@@ -156,6 +156,35 @@ function updatePlayers() {
 }
 
 function setButtonsAndPlay() {
+  const split = document.querySelectorAll('.split');
+  split.forEach(sp => {
+    const i = +sp.dataset.id;
+    sp.addEventListener('click', () => {
+      if (currIndex == i) {   // Confirm this button is belong to the current hand.
+        const onHand = players[i].getOnHand();
+        const v_0 = onHand[0].getValue();
+        const v_1 = onHand[1].getValue();
+        if (onHand.length == 2 && v_0 == v_1) {   // Check the conditions to split.
+          if (v_0 == 11 && players[i].getIsSplited()) {
+            message('Second split is not allowed for double Aces');
+          } else {
+            players[i].setIsSplited(true);
+            players[i].setOnHand([onHand[0]]);
+            // Clone this player for the additional hand for split action.
+            const temp = ctrl.clonePlayer(players[i]);
+            temp.setIsSplited(true);
+            temp.setOnHand([onHand[1]]);
+            // Replace current player and add player's clone to the lists.
+            players = [...players.slice(0,i), players[i], temp, ...players.slice(i+1)];
+            gameResult = [...gameResult.slice(0,i), 0, 0, ...gameResult.slice(i+1)];
+            pView.renderCards(players);     // Render UI again with changes.
+            setButtonsAndPlay();
+          }
+        }
+      }
+    });
+  });
+
   const double = document.querySelectorAll('.double');
   double.forEach(d => {
     const i = d.dataset.id;
