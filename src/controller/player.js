@@ -68,3 +68,22 @@ export const removePlayer = (players, callback) => {
     callback();
   });
 }
+
+// Collect valid(inPlay==true) players for the game.
+export function gatherActivePlayers(origin) {
+  const players = [];
+  origin.forEach((p) => {
+    if (p.getInPlay()) {
+      players.push(clonePlayer(p)); 
+    } else p.setPrevResult("didn't play");
+  });
+  return [...players];
+}
+
+// Clone an Instance instead of copying
+export function clonePlayer(P) {
+  const newP = new PLAYER(P.getName(), P.getAmount(), true);
+  newP.setBetting(P.getBetting());
+  newP.setPrevResult('');
+  return newP;
+}

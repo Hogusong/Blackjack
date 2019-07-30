@@ -11,7 +11,6 @@ let gameResult = [];
 const dealer = new PLAYER('Dealer', 100000000, true);   // Create the dealer.
 let inAddOrRemove = false, gameStarted = false;
 let cards = base.shuffleCards();
-console.log(cards);
 init();
 
 function init() {
@@ -34,6 +33,23 @@ function init() {
       inAddOrRemove = true;
       ctrl.removePlayer(playersBase, init);    // init is a callback function.
     } else message('There is no player in this table.')
+  }
+
+  dom.btnStart.onclick = () => {
+    // Make a list of the in-play players.
+    // The reason using the extra list(players) is to accept more hands 
+    // when a player has a chance to split cards. - Hands will be flexible.
+    players = ctrl.gatherActivePlayers(playersBase);
+    if (players.length < 1) {
+      message('Wait until players join the game!');
+    } else {
+      document.querySelector('body h2').innerHTML = "... Enjoy the Game ...";
+      // To keep the result of each player's hand including split situation.
+      gameResult = players.map(p => 0);   // 0 means pending or tie.
+      gameStarted = true;       // Set the status in-game mode.
+      console.log(players);
+      console.log(gameResult);
+    }
   }
 
   // Add an Event to the in-play button. Let players join the game.
