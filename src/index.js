@@ -26,33 +26,39 @@ function init() {
   settingPlayer(playersBase);         // Show available players in the table
 
   dom.btnAdd.onclick = () => {
-    inAddOrRemove = true;
-    ctrl.addPlayer(playersBase, init);        // init is a callback function.
+    if (base.canAcceptClick(gameStarted, inAddOrRemove)) {
+      inAddOrRemove = true;
+      ctrl.addPlayer(playersBase, init);        // init is a callback function.
+    }
   }
 
   dom.btnRemove.onclick = () => {
-    if (playersBase.length > 0) {
-      inAddOrRemove = true;
-      ctrl.removePlayer(playersBase, init);    // init is a callback function.
-    } else message('There is no player in this table.')
+    if (base.canAcceptClick(gameStarted, inAddOrRemove)) {
+      if (playersBase.length > 0) {
+        inAddOrRemove = true;
+        ctrl.removePlayer(playersBase, init);    // init is a callback function.
+      } else message('There is no player in this table.')
+    }
   }
 
   dom.btnStart.onclick = () => {
-    // Make a list of the in-play players.
-    // The reason using the extra list(players) is to accept more hands 
-    // when a player has a chance to split cards. - Hands will be flexible.
-    players = ctrl.gatherActivePlayers(playersBase);
-    if (players.length < 1) {
-      message('Wait until players join the game!');
-    } else {
-      document.querySelector('body h2').innerHTML = "... Enjoy the Game ...";
-      // To keep the result of each player's hand including split situation.
-      gameResult = players.map(p => 0);   // 0 means pending or tie.
-      gameStarted = true;       // Set the status in-game mode.
-      initialDraw()             // Draw 2 cards for dealer and all in-play players
-      dView.renderInit(dealer.getOnHand());   // Render dealer's 2 cards 
-      pView.renderCards(players);       // Render initial 2 cards for all players
-      checkBlackjack();         // If dealer has blackjack, game will be over.
+    if (base.canAcceptClick(gameStarted, inAddOrRemove)) {
+      // Make a list of the in-play players.
+      // The reason using the extra list(players) is to accept more hands 
+      // when a player has a chance to split cards. - Hands will be flexible.
+      players = ctrl.gatherActivePlayers(playersBase);
+      if (players.length < 1) {
+        message('Wait until players join the game!');
+      } else {
+        document.querySelector('body h2').innerHTML = "... Enjoy the Game ...";
+        // To keep the result of each player's hand including split situation.
+        gameResult = players.map(p => 0);   // 0 means pending or tie.
+        gameStarted = true;       // Set the status in-game mode.
+        initialDraw()             // Draw 2 cards for dealer and all in-play players
+        dView.renderInit(dealer.getOnHand());   // Render dealer's 2 cards 
+        pView.renderCards(players);       // Render initial 2 cards for all players
+        checkBlackjack();         // If dealer has blackjack, game will be over.
+      }
     }
   }
 

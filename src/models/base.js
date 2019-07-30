@@ -75,3 +75,15 @@ export const message = (msg) => {
   dom.message.style.color = 'red'
   setTimeout(() => dom.message.style.color = 'white', 2000);
 }
+
+// Control the access of the main button's funtion.
+// After a function is active, make the others disable.
+export const canAcceptClick = (gameStarted, inAddOrRemove) => {
+  if (gameStarted) {
+    message("You are in the game. Please finish the game first.")
+  }
+  if (inAddOrRemove) {
+    message("You are in 'add or remove' mode. Finish it first.");
+  }
+  return !(gameStarted || inAddOrRemove);
+}
