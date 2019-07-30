@@ -35,4 +35,32 @@ function init() {
       ctrl.removePlayer(playersBase, init);    // init is a callback function.
     } else message('There is no player in this table.')
   }
+
+  // Add an Event to the in-play button. Let players join the game.
+  const inplay = document.querySelectorAll('.inplay');
+  inplay.forEach((P, i) => {
+    P.addEventListener('click', () => {
+      const betAmt = +document.getElementById('bet-amt-'+i).value;
+      if (betAmt < 5) {
+        message('Betting amount is too low.')
+      } if (betAmt > playersBase[i].getAmount()) {
+        message('Player need more money in pocket.')
+      } else {
+        playersBase[i].setBetting(betAmt);  // Reset the betting amount for each game
+        playersBase[i].setInPlay(true);     // Reset player.inplay : false -> true
+        init();
+      }
+    })
+  });
+
+  // Add an event to the stay-out button. Let players stay out of the game.
+  const stayout = document.querySelectorAll('.stayout');
+  stayout.forEach((S, i) => {
+    S.addEventListener('click', () => {
+      if (playersBase[i].getInPlay()) {
+        playersBase[i].setInPlay(false);    // Reset player.inplay : true -> false
+        init();
+      }
+    })
+  })
 }
