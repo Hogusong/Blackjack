@@ -47,8 +47,9 @@ function init() {
       // To keep the result of each player's hand including split situation.
       gameResult = players.map(p => 0);   // 0 means pending or tie.
       gameStarted = true;       // Set the status in-game mode.
+      initialDraw()             // Draw 2 cards for dealer and all in-play players
       console.log(players);
-      console.log(gameResult);
+      console.log(dealer);
     }
   }
 
@@ -79,4 +80,22 @@ function init() {
       }
     })
   })
+}
+
+function initialDraw() {
+  // Shuffe cards again when too little cards left as avaiable.
+  if (cards.length < 27) cards = base.shuffleCards();
+  dealer.emptyOnHand();         // Make empty the dealer's onHand[].
+  dom.dScore.innerText = '';
+
+  drawCard(dealer)              // Draw a card for Dealer.
+  players.forEach(player => drawCard(player));  // Draw a card for all players.
+  drawCard(dealer)
+  players.forEach(player => drawCard(player));
+}
+
+function drawCard(player) {
+  if (!player.getInPlay()) return;
+  const card = cards.pop();
+  player.addOnHand(card);      // Add the drawn card to the player's hand.
 }
