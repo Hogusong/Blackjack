@@ -204,4 +204,26 @@ function setButtonsAndPlay() {
       }
     })
   })
+  
+  const hit = document.querySelectorAll('.hit');
+  hit.forEach(h => {
+    const i = h.dataset.id;
+    h.addEventListener('click', () => {
+      if (currIndex == i) {       // Activate this event when currIndex == player's ID
+        drawCard(players[i]);
+        pView.renderPlayerScore(players[i], i);
+        pView.renderLastCard(players[i].lastCard(), i);
+
+        const onHand = players[i].getOnHand();
+        if (onHand.length == 2 && onHand[0].getValue == 11) {
+          document.querySelectorAll('.stay')[i].click();      // Click 'Stay' button.
+        } 
+        if (players[i].getScore() > 21) {   // Aftere hit, player will loose if score is over 21.
+          players[i].looseHand();
+          gameResult[i] = -1;
+          pView.playerMSG('msg-' + i, 'Player lost this hand!');
+        }
+      }
+    })
+  })
 }

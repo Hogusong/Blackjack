@@ -91,3 +91,6 @@ table a {
 .spades .suit::after {  content: '\2660'  }
 .clubs .suit::after {  content: '\2663'  }
 .diams .suit::after {  content: '\2666'  }
+
+.player-msg { color: red; margin-bottom: -10px;}
+.option { margin-top: 10px; }
