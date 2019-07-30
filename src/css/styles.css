@@ -31,3 +31,18 @@ input {
 #add-new, #remove-player {
   display: none;
 }
+
+.bet-amt {
+  width: 100px;
+}
+
+th, td {
+  border: 1px solid black;
+  margin-right: 10px;
+  font-size: 18px;
+  padding: 5px 20px;
+}
+
+table a {
+  color: red
+}

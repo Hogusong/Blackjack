@@ -29,4 +29,10 @@ function init() {
     ctrl.addPlayer(playersBase, init);        // init is a callback function.
   }
 
+  dom.btnRemove.onclick = () => {
+    if (playersBase.length > 0) {
+      inAddOrRemove = true;
+      ctrl.removePlayer(playersBase, init);    // init is a callback function.
+    } else message('There is no player in this table.')
+  }
 }

@@ -1,5 +1,6 @@
 import PLAYER from '../models/player';
 import { dom, message } from '../models/base';
+import { renderRemoveTable } from '../views/playerView';
 
 // Gathering player's data from the LocalStorage.
 export const createPlayers = () => {
@@ -43,4 +44,27 @@ export const addPlayer = (players, callback) => {
     dom.secAddPlayer.style.display = 'none';
     callback();
   }
+}
+
+// init() of index.js is the callback(). 
+// To re-render initial UI after this job done.
+export const removePlayer = (players, callback) => {
+  renderRemoveTable(players);     // Render the player's list and give the option to delete.
+  const btnDelete = document.querySelectorAll('.btn-delete');
+  btnDelete.forEach((x, i) => {
+    x.addEventListener('click', () => {
+      message(players[i].getName() + ' is leaving the table. Bye now.')
+      players.splice(i, 1);
+      storeInStorage(players);    // Update the LocalStorage after the player is removed.
+      if (players.length > 0) removePlayer(players, callback);  // Stay if any player is available.
+      else {                      // Return to main UI if no player is available.
+        dom.secRemove.style.display = 'none';
+        callback();
+      }
+    })
+  });
+  dom.btnClose.addEventListener('click', () => {
+    dom.secRemove.style.display = 'none';
+    callback();
+  });
 }
