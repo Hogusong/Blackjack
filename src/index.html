@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Blackjack</title>
+</head>
+<body>
+  <h2>Welcome to the Blackjack table!</h2>
+  <span id="message">&nbsp;</span>
+  <div id="main-btns">
+    <button class="btns" id="btn-start">Start Game</button>
+    <button class="btns" id="btn-add">Add</button>
+    <button class="btns" id="btn-remove">Remove</button>
+  </div>
+  <section id="add-new">
+    <h3>Add a new Player</h3>
+    <div>
+      <span class="description">Player's Name : </span>
+      <input id="player-name" type="text" placeholder="player's name">
+    </div>
+    <div>
+      <span class="description">Pocket Money : </span>
+      <input id="start-amt" type="number" min=10 value=100>
+    </div>
+    <div>
+      <button class="btns" id="btn-submit">Submit</button>
+      <button class="btns" id="btn-cancel">Cancel</button>
+    </div>
+  </section>
+  <section id="dealer">
+    <h3>Dealer's Hand<span id="dealer-score"></span></h3>
+    <div id="dealer-hand"></div>
+  </section>
+  <section id="init-table">
+    <h3>Player's Choice</h3>
+    <div id="players"></div>
+  </section>
+  <section id="remove-player">
+    <h3>Remove Player</h3>
+    <table id="player-table"></table>
+    <button class="btns" id="btn-close">Close Table</button>
+  </section>
+  <section id="game-board"></section>
+</body>
+</html>

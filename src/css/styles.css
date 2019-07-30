@@ -1,0 +1,33 @@
+body {  padding: 20px 30px;  }
+
+h2 {  margin-bottom: 0; }
+h3 {  color: blue;  }
+p  {  font-size: 18px;  margin: 0;  }
+#message {  color: red;  }
+section {  margin-top: 30px;  }
+span {  font-size: 18px;  }
+
+input {
+  font-size: 16px;
+  padding: 5px 8px;
+  margin-bottom: 5px;
+}
+
+.btns {
+  border-radius: 8px;
+  font-size: 18px;
+  padding: 4px 13px;
+  background: lemonchiffon;
+  margin: 5px 10px 20px 0;
+}
+
+.btns:focus {
+  background: lightcoral;
+  outline: none;
+}
+.inplay { color: blue; }
+.stayout { color: red; margin: 0 24px 0 40px; }
+#main-btns {  margin-bottom: -20px;  }
+#add-new, #remove-player {
+  display: none;
+}
