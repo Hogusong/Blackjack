@@ -25,7 +25,7 @@ export const addPlayer = (players, callback) => {
   dom.secAddPlayer.style.display = 'block'
 
   dom.btnSubmit.onclick = () => {
-    const name = dom.inPlayerName.value.trim();
+    const name = dom.inPlayerName.value.trim().substr(0,8);
     const amount = +dom.inAmount.value;
     if (name.length > 1 && amount >= 10) {
       if (!players.find(p => p.getName() === name)) {

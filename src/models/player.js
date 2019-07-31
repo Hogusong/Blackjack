@@ -50,21 +50,21 @@ export default class PLAYER {
   looseHand() {
     this.amount -= this.betting;
     this.setInitPlayer();
-    this.prevResult = 'Player lost this hand!';
+    this.prevResult = 'You lost hand!';
   }
   blackjack() {
     this.betting = this.betting * 1.5;
     this.setInitPlayer();
-    this.prevResult = 'Player had Blackjack!';
+    this.prevResult = 'Blackjack! Wow!';
   }
   winHand() {
     this.amount += this.betting;
     this.setInitPlayer();
-    this.prevResult = 'Player won this hand!';
+    this.prevResult = 'You won hand!';
   }
   evenHand() {
     this.setInitPlayer();
-    this.prevResult = 'Player had even hand!';
+    this.prevResult = 'You had even!';
   }
   setInitPlayer() {
     this.inPlay = false;
