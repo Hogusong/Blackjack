@@ -8,7 +8,7 @@ export default class PLAYER {
     this.isSplited = false;         // help tracking player did split of not.
     this.canDrawCard = inPlay;      // help taacking player is active or not.
     this.inPlay = inPlay;           // help tracking player joined the game or not.
-    this.prevResult = 'New player'; // to say the last hand's result.
+    this.prevResult = 'Welcome!'; // to say the last hand's result.
   }
 
   getName() {  return this.name;  }
@@ -50,24 +50,24 @@ export default class PLAYER {
   looseHand() {
     this.amount -= this.betting;
     this.setInitPlayer();
-    this.prevResult = 'You lost hand!';
+    this.prevResult = 'Lost hand!';
   }
   blackjack() {
     this.betting = this.betting * 1.5;
     this.setInitPlayer();
-    this.prevResult = 'Blackjack! Wow!';
+    this.prevResult = 'Blackjack. Wow!';
   }
   winHand() {
     this.amount += this.betting;
     this.setInitPlayer();
-    this.prevResult = 'You won hand!';
+    this.prevResult = 'Won hand!';
   }
   evenHand() {
     this.setInitPlayer();
-    this.prevResult = 'You had even!';
+    this.prevResult = 'Even hand!';
   }
   setInitPlayer() {
-    this.inPlay = false;
+    // this.inPlay = false;
     this.canDrawCard = false;
     this.countAces = 0;
   }

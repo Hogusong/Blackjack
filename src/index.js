@@ -9,7 +9,7 @@ import * as pView from './views/playerView';
 import * as help from './views/helpView';
 
 let playersBase = ctrl.createPlayers();     // Get players' infomation from the LocalStorage.
-let players = [], currIndex = -1, timer, delayTime = 3000;
+let players = [], currIndex = -1, timer, delayTime = 2000;
 let gameResult = [];
 const dealer = new PLAYER('Dealer', 100000000, true);   // Create the dealer.
 let inAddOrRemove = false, gameStarted = false;

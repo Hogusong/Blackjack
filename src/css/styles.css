@@ -164,10 +164,6 @@ table a {
     line-height: 12px;
     right: 2px;
     bottom: 2px;
-    transform: rotate(-180deg);
-    -webkit-transform: rotate(-180deg);
-    -moz-transform: rotate(-180deg);
-    -ms-transform: rotate(-180deg);
   }
 
   .btns {
@@ -177,6 +173,54 @@ table a {
     background: lemonchiffon;
     margin: 5px 10px 20px 0;
   }  
+
+  .stayout { color: red; margin: 0 30px 0 50px; }
+  .player-msg { font-size: 14px; }
+}
+
+@media(max-width: 400px){
+  h2 { font-size: 20px; }
+  h3 { font-size: 16px; }
+  p, span { font-size: 16px;}
+  input { 
+    font-size: 14px;
+    padding: 2px 8px;
+  }
+
+  .icard {
+    height: 65px;
+    width: 40px;
+    padding: 3px;
+    border-radius: 5px;
+  }
+
+  .top-card {
+    font-size: 14px;
+    line-height: 10px;
+    left: 2px;
+    top: 2px;
+  }
+
+  .content-card {
+    text-align: center;
+    font-size: 22px;
+  }
+
+  .bottom-card {
+    font-size: 14px;
+    line-height: 10px;
+    right: 2px;
+    bottom: 2px;
+  }
+
+  .btns {
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 4px 8px;
+    background: lemonchiffon;
+    margin: 5px 5px 20px 0;
+  }  
+  .modal-body { width: 360px;}
   .stayout { color: red; margin: 0 30px 0 50px; }
   .player-msg { font-size: 14px; }
 }
