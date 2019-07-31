@@ -17,3 +17,10 @@ function cardView(card) {
     </div>
   `
 }
+
+// Open and render all dealer's cards.
+export const openCards = onHand => {
+  let markup = '';
+  onHand.forEach(card => markup += cardView(card))
+  dom.dHand.innerHTML = markup;
+}

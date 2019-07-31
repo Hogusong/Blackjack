@@ -155,6 +155,7 @@ function updatePlayers() {
   })
 }
 
+// Set Events to the playing options (Split, Double, Hit, and Stay).
 function setButtonsAndPlay() {
   const split = document.querySelectorAll('.split');
   split.forEach(sp => {
@@ -249,4 +250,33 @@ function setButtonsAndPlay() {
   })
 }
 
-function drawDealerCards() {}
+function drawDealerCards() {
+  // Check any player is in-play mode. If yes, then dealer draw cards .
+  if (ctrl.countInPlayer(players) > 0) { 
+    while (dealer.getScore() < 17) {
+      drawCard(dealer);           // Dealer draw cards until the score goes over 16.
+    }
+    const scoreToPay = dealer.getScore() > 21 ? 0 : dealer.getScore()
+    payToPlayer(scoreToPay);      // Compare the scores and pay them.
+  } 
+  dom.dScore.innerText = ' -- score : ' + dealer.getScore();
+  dView.openCards(dealer.getOnHand());    // Show dealer's cards.
+  timer = setTimeout(() => init(), delayTime)  // Show the result for 3 seconds.
+}
+
+// limit = 0 or 16 < limit < 22.
+// Compare score wiht all alived players and pay them whoelse has over limit.
+function payToPlayer(limit) {
+  players.forEach((p, i) => {
+    if (p.getInPlay()) {
+      if (p.getScore() > limit) {
+        gameResult[i] = 1;
+        p.winHand();
+      } else if (p.getScore() < limit) {
+        gameResult[i] = -1;
+        p.looseHand()
+      } else p.evenHand();
+    }
+  });
+  updatePlayers();      // Update the game result to the playerBase (origin)
+}
