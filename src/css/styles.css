@@ -121,10 +121,14 @@ table a {
   text-align: center;
 }
 
-.modal-content {
+#options, #game-rule, #bj-guide {
+  display: none;
+}
+
+/* .modal-content {
   width: 90%;
   border: 1px solid black;
-}
+} */
 
 .modal img {
   width: 95%;

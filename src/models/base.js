@@ -13,6 +13,7 @@ export const dom = {
   btnGameHelp: document.getElementById('btn-g-help'),
   btnGuide: document.getElementById('btn-guide'),
   btnExit: document.getElementById('btn-exit'),
+  btnOption: document.getElementById('btn-option'),
 
   secAddPlayer: document.getElementById('add-new'),
   secDealer: document.getElementById('dealer'),
@@ -22,6 +23,7 @@ export const dom = {
   modalStart: document.getElementById('modal-start'),
   gameRule: document.getElementById('game-rule'),
   blackjackGuide: document.getElementById('bj-guide'),
+  options: document.getElementById('options'),
 
   inPlayerName: document.getElementById('player-name'),
   inAmount: document.getElementById('start-amt'),

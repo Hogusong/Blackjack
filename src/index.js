@@ -6,7 +6,7 @@ import { dom, message } from './models/base';
 import { settingPlayer } from './views/initialView';
 import * as dView from './views/dealerView';
 import * as pView from './views/playerView';
-import * as help from './views/helpView';
+import * as help from './controller/help';
 
 let playersBase = ctrl.createPlayers();     // Get players' infomation from the LocalStorage.
 let players = [], currIndex = -1, timer, delayTime = 2000;
@@ -26,25 +26,7 @@ function init() {
   dom.dScore.innerText = ' -- last score : ' + dealer.getScore();
   settingPlayer(playersBase);         // Show available players in the table
 
-  dom.btnHelp.onclick = () => {
-    dom.modalStart.style.display = 'block';
-    help.renderGuide();
-    setEvent();
-
-    function setEvent() {
-      dom.btnGuide.onclick = () => {
-        help.renderGuide();
-        setEvent();
-      }
-      dom.btnGameHelp.onclick = () => {
-        help.renderGameHelp();
-        setEvent();
-      }
-      dom.btnExit.onclick = () => {
-        dom.modalStart.style.display = 'none';
-      }
-    }
-  }
+  dom.btnHelp.onclick = help.setEventForHelp;
 
   dom.btnAdd.onclick = () => {
     if (base.canAcceptClick(gameStarted, inAddOrRemove)) {
