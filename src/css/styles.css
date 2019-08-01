@@ -125,10 +125,20 @@ table a {
   display: none;
 }
 
-/* .modal-content {
-  width: 90%;
-  border: 1px solid black;
-} */
+#options, #game-rule, #bj-guide {  display: none;  }
+.modal img {  width: 95%;  }
+#options {
+  text-align: left;
+  padding: 0 30px;
+}
+.option {
+  margin-bottom: 15px;
+}
+.option p {  margin-bottom: 5px;  }
+.option input {  width: 80px;  }
+#config-btns {
+  text-align: center;
+}
 
 .modal img {
   width: 95%;
