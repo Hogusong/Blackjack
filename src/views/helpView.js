@@ -24,7 +24,7 @@ export const renderOptions = () => {
       <h4>Set the Configuration up</h4>
       <form id="myForm">
         <div class="config-option">
-          <p>How to show the Game Result ?</p>
+          <p>1. How to show the Game Result ?</p>
           <div>
             <input type="radio" name="howToShow">
             <span>Show in a Box</span>
@@ -35,11 +35,11 @@ export const renderOptions = () => {
           </div>
         </div>
         <div class="config-option">
-          <span>Delay Time : </span>
+          <span>2. Delay Time : </span>
           <input type="number" name="delayTime" min=1 max=5> seconds
         </div>
         <div class="config-option">
-          <p>Keep last player as In-Play ?</p>
+          <p>3. Keep last player as In-Play ?</p>
           <div>
             <input type="radio" name="setPlayer">
             <span>Yes, keep as In-Play.</span>
@@ -50,7 +50,7 @@ export const renderOptions = () => {
           </div>
         </div>
         <div class="config-option">
-          <p>Keep last bet amount for the Game ?</p>
+          <p>4. Keep last bet amount for the Game ?</p>
           <div>
             <input type="radio" name="keepBet">
             <span>Yes, keep it.</span>
@@ -61,12 +61,12 @@ export const renderOptions = () => {
           </div>
         </div>
         <div class="config-option">
-          <span>Minimum Betting $ </span>
+          <span>5. Minimum Betting $ </span>
           <input type="number" name="minBet" min=1>
         </div>
         <div class="config-option">
           <div>
-            <span>How many Decks :&nbsp;</span>
+            <span>6. How many Decks :&nbsp;</span>
             <input type="number" name="decks" min=4 max=10>
           </div>
         </div>
