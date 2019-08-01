@@ -3,6 +3,7 @@ import { dom } from '../models/base';
 
 export const setEventForHelp = () => {
   dom.modalStart.style.display = 'block';
+  dom.modalBody.style.display = 'block';
   help.renderGuide();
   setEvent();
 }
@@ -18,6 +19,7 @@ function setEvent() {
   }
   dom.btnExit.onclick = () => {
     dom.modalStart.style.display = 'none';
+    dom.modalBody.style.display = 'none';
   }
 
   dom.btnOption.onclick = configuration;

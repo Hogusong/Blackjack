@@ -7,6 +7,7 @@ import { settingPlayer } from './views/initialView';
 import * as dView from './views/dealerView';
 import * as pView from './views/playerView';
 import * as help from './controller/help';
+import { renderGameResult } from './views/resultView';
 
 let playersBase = ctrl.createPlayers();     // Get players' infomation from the LocalStorage.
 let players = [], currIndex = -1, timer, delayTime = 2000;
@@ -71,7 +72,12 @@ function init() {
           // currIndex is needed to notify whose buttons are active currently.
           currIndex = players.findIndex(p => p.getCanDraw());
           setButtonsAndPlay();              
-        } else timer = setTimeout(() => init(), delayTime)  // Show the result for 3 seconds.
+        } else {
+          // Show the game result in a report box.
+          if (config.showResult) renderGameResult(dealer, players, init);
+          // Show the game result by delaying.
+          else timer = setTimeout(() => init(), +config.delay);
+        }
       }
     }
   }
@@ -266,7 +272,10 @@ function drawDealerCards() {
   } 
   dom.dScore.innerText = ' -- score : ' + dealer.getScore();
   dView.openCards(dealer.getOnHand());    // Show dealer's cards.
-  timer = setTimeout(() => init(), delayTime)  // Show the result for 3 seconds.
+  // Show the game result in a report box.
+  if (config.showResult) renderGameResult(dealer, players, init);
+  // Show the game result by delaying.
+  else timer = setTimeout(() => init(), config.delay);
 }
 
 // limit = 0 or 16 < limit < 22.

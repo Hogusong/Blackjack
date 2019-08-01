@@ -21,9 +21,11 @@ export const dom = {
   secRemove: document.getElementById('remove-player'),
   secBoard: document.getElementById('game-board'),
   modalStart: document.getElementById('modal-start'),
+  modalBody: document.querySelector('.modal-body'),
   gameRule: document.getElementById('game-rule'),
   blackjackGuide: document.getElementById('bj-guide'),
   options: document.getElementById('options'),
+  gameResult: document.getElementById('game-result'),
 
   inPlayerName: document.getElementById('player-name'),
   inAmount: document.getElementById('start-amt'),
