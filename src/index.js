@@ -66,17 +66,17 @@ function init() {
         checkBlackjack();         // If dealer has blackjack, game will be over.
 
         // Dealer has no blackjack but some players may have.
-        if (ctrl.countInPlayer(players) > 0) {
-          // Every hands will have four choice buttons: Split, Double, Hit, and Stay.
-          // Events were added to the buttons for each player and the game started. 
-          // currIndex is needed to notify whose buttons are active currently.
-          currIndex = players.findIndex(p => p.getCanDraw());
-          setButtonsAndPlay();              
-        } else {
+        // Every hands will have four choice buttons: Split, Double, Hit, and Stay.
+        // Events were added to the buttons for each player and the game started. 
+        // currIndex is needed to notify whose buttons are active currently.
+        currIndex = players.findIndex(p => p.getCanDraw());
+        if (currIndex < 0) {
           // Show the game result in a report box.
           if (config.showResult) renderGameResult(dealer, players, init);
           // Show the game result by delaying.
           else timer = setTimeout(() => init(), +config.delay);
+        } else {
+          setButtonsAndPlay();              
         }
       }
     }
@@ -87,9 +87,9 @@ function init() {
   inplay.forEach((P, i) => {
     P.addEventListener('click', () => {
       const betAmt = +document.getElementById('bet-amt-'+i).value;
-      if (betAmt < 5) {
+      if (betAmt < config.minBetting) {
         message('Betting amount is too low.')
-      } if (betAmt > playersBase[i].getAmount()) {
+      } else if (betAmt > playersBase[i].getAmount()) {
         message('Player need more money in pocket.')
       } else {
         playersBase[i].setBetting(betAmt);  // Reset the betting amount for each game
