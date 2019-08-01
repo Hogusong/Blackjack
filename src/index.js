@@ -131,6 +131,8 @@ function drawCard(player) {
 
 function checkBlackjack() {
   if (dealer.hasBlackjack()) {    // Dealer has a blackjack. Game is over. 
+    dom.dScore.innerText = ' -- score : ' + dealer.getScore();
+    dView.openCards(dealer.getOnHand());    // Show dealer's cards.
     players.forEach((p, i) => {
       if (p.hasBlackjack()) p.evenHand();   // Player has a blackjack, so even.
       else {
@@ -231,7 +233,11 @@ function setButtonsAndPlay() {
 
         const onHand = players[i].getOnHand();
         if (onHand.length == 2 && onHand[0].getValue == 11) {
-          document.querySelectorAll('.stay')[i].click();      // Click 'Stay' button.
+          players[i].setCanDraw(false);
+          pView.playerMSG('msg-' + i, 'Player stay with current score!')
+          currIndex = players.findIndex(p => p.getCanDraw());   // Move to the next hand.
+          // If this was the last player on table, then open dealer's card.
+          if (currIndex < 0) drawDealerCards(); 
         } 
         if (players[i].getScore() > 21) {   // Aftere hit, player will loose if score is over 21.
           players[i].looseHand();
@@ -263,7 +269,7 @@ function setButtonsAndPlay() {
 
 function drawDealerCards() {
   // Check any player is in-play mode. If yes, then dealer draw cards .
-  if (ctrl.countInPlayer(players) > 0) { 
+  if (gameResult.indexOf(0) >= 0) { 
     while (dealer.getScore() < 17) {
       drawCard(dealer);           // Dealer draw cards until the score goes over 16.
     }
@@ -281,16 +287,27 @@ function drawDealerCards() {
 // limit = 0 or 16 < limit < 22.
 // Compare score wiht all alived players and pay them whoelse has over limit.
 function payToPlayer(limit) {
-  players.forEach((p, i) => {
-    if (p.getInPlay()) {
-      if (p.getScore() > limit) {
+  gameResult.forEach((v, i) => {
+    if (v === 0) {
+      if (players[i].getScore() > limit) {
         gameResult[i] = 1;
-        p.winHand();
-      } else if (p.getScore() < limit) {
+        players[i].winHand();
+      } else if (players[i].getScore() < limit) {
         gameResult[i] = -1;
-        p.looseHand()
-      } else p.evenHand();
+        players[i].looseHand()
+      } else players[i].evenHand();
     }
-  });
+  })
+  // players.forEach((p, i) => {
+  //   if (p.getInPlay()) {
+  //     if (p.getScore() > limit) {
+  //       gameResult[i] = 1;
+  //       p.winHand();
+  //     } else if (p.getScore() < limit) {
+  //       gameResult[i] = -1;
+  //       p.looseHand()
+  //     } else p.evenHand();
+  //   }
+  // });
   updatePlayers();      // Update the game result to the playerBase (origin)
 }

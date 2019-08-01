@@ -23,9 +23,11 @@ export default class PLAYER {
   getIsSplited() { return this.isSplited; }
   getPrevResult() {  return this.prevResult;  }
   getScore() {
-    let score = 0;
-    this.onHand.forEach(card => score += card.getValue());
-    let count = this.countAces;
+    let score = 0, count = 0;
+    this.onHand.forEach(card => {
+      score += card.getValue();
+      if (card.getValue() > 10) count++;
+    });
     while (score > 21 && count-- > 0) score -= 10;
     return score;
   }

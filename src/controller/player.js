@@ -87,11 +87,3 @@ export function clonePlayer(P) {
   newP.setPrevResult('');
   return newP;
 }
-
-export function countInPlayer(players) {
-  let count = 0; 
-  players.forEach(p => {
-    if (p.getInPlay()) count++;
-  })
-  return count;
-}
