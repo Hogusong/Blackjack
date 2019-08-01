@@ -1,3 +1,5 @@
+import { getConfiguration } from '../controller/help';
+
 export default class PLAYER {
   constructor(name, amount, inPlay=false) {
     this.name = name;
@@ -67,7 +69,9 @@ export default class PLAYER {
     this.prevResult = 'Even hand!';
   }
   setInitPlayer() {
-    // this.inPlay = false;
+    const config = getConfiguration();
+    if (!config.keepLastBet) this.betting = +config.minBetting
+    this.inPlay = config.keepInPlay;
     this.canDrawCard = false;
     this.countAces = 0;
   }

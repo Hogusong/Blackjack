@@ -13,8 +13,8 @@ let players = [], currIndex = -1, timer, delayTime = 2000;
 let gameResult = [];
 const dealer = new PLAYER('Dealer', 100000000, true);   // Create the dealer.
 let inAddOrRemove = false, gameStarted = false;
-let cards = base.shuffleCards();
 let config = help.getConfiguration();
+let cards = base.shuffleCards(+config.howManyDecks);
 
 init();
 
@@ -107,7 +107,7 @@ function init() {
 
 function initialDraw() {
   // Shuffe cards again when too little cards left as avaiable.
-  if (cards.length < 27) cards = base.shuffleCards();
+  if (cards.length < 27) cards = base.shuffleCards(+config.howManyDecks);
   dealer.emptyOnHand();         // Make empty the dealer's onHand[].
   dom.dScore.innerText = '';
 
