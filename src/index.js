@@ -14,6 +14,8 @@ let gameResult = [];
 const dealer = new PLAYER('Dealer', 100000000, true);   // Create the dealer.
 let inAddOrRemove = false, gameStarted = false;
 let cards = base.shuffleCards();
+let config = help.getConfiguration();
+
 init();
 
 function init() {

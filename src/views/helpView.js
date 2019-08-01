@@ -23,7 +23,7 @@ export const renderOptions = () => {
   dom.options.innerHTML = `
       <h4>Set the Configuration up</h4>
       <form id="myForm">
-        <div class="option">
+        <div class="config-option">
           <p>How to show the Game Result ?</p>
           <div>
             <input type="radio" name="howToShow">
@@ -34,11 +34,11 @@ export const renderOptions = () => {
             <span>Delay Browser</span>
           </div>
         </div>
-        <div class="option">
+        <div class="config-option">
           <span>Delay Time : </span>
-          <input type="number" name="delayTime" value=2 min=1 max=5> seconds
+          <input type="number" name="delayTime" min=1 max=5> seconds
         </div>
-        <div class="option">
+        <div class="config-option">
           <p>Keep last player as In-Play ?</p>
           <div>
             <input type="radio" name="setPlayer">
@@ -49,7 +49,7 @@ export const renderOptions = () => {
             <span>No, reset all as Stay-Out.</span>
           </div>
         </div>
-        <div class="option">
+        <div class="config-option">
           <p>Keep last bet amount for the Game ?</p>
           <div>
             <input type="radio" name="keepBet">
@@ -60,20 +60,19 @@ export const renderOptions = () => {
             <span>No, reset minimum Bet.</span>
           </div>
         </div>
-        <div class="option">
+        <div class="config-option">
           <span>Minimum Betting $ </span>
-          <input type="number" name="minBet" value=5 min=1>
+          <input type="number" name="minBet" min=1>
         </div>
-        <div class="option">
+        <div class="config-option">
           <div>
             <span>How many Decks :&nbsp;</span>
-            <input type="number" name="decks" value=6 min=4 max=10>
+            <input type="number" name="decks" min=4 max=10>
           </div>
         </div>
         <div id="config-btns">
-          <button class="btns" type="submit">Submit</button>
-          <button class="btns" type="button" id="default">Reset Default</button>
-          <button class="btns" type="button" id="exitNoSave">Cancel</button>
+          <button class="btns" id="submit">Submit</button>
+          <button class="btns" id="default">Reset Default</button>
         </div>
       </form>
   `;
