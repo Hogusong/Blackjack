@@ -54,7 +54,7 @@ function init() {
       // when a player has a chance to split cards. - Hands will be flexible.
       players = ctrl.gatherActivePlayers(playersBase);
       if (players.length < 1) {
-        message('Wait until players join the game!');
+        message('Nobody join or Someone has not enough money!');
       } else {
         document.querySelector('body h2').innerHTML = "... Enjoy the Game ...";
         // To keep the result of each player's hand including split situation.
@@ -71,12 +71,13 @@ function init() {
         // currIndex is needed to notify whose buttons are active currently.
         currIndex = players.findIndex(p => p.getCanDraw());
         if (currIndex < 0) {
+          updatePlayers();
           // Show the game result in a report box.
           if (config.showResult) renderGameResult(dealer, players, init);
           // Show the game result by delaying.
           else timer = setTimeout(() => init(), +config.delay);
         } else {
-          setButtonsAndPlay();              
+          setButtonsAndPlay();         
         }
       }
     }
@@ -140,7 +141,7 @@ function checkBlackjack() {
         p.looseHand();        // Player does not have a blackjack, so loose.
       }
     })
-    updatePlayers();          // Update the game result to the playerBase (origin)
+    // updatePlayers();          // Update the game result to the playerBase (origin)
     message('Game over. Dealer has Blackjsck.');
   } else {                        // Dealer does not have a blackjack. Continue the game.
     players.forEach((p,i) => {
@@ -243,6 +244,7 @@ function setButtonsAndPlay() {
           players[i].looseHand();
           gameResult[i] = -1;
           pView.playerMSG('msg-' + i, 'Player lost this hand!');
+          console.log(players);
           currIndex = players.findIndex(p => p.getCanDraw());   // Move to the next hand.
           // If this was the last player on table, then open dealer's card.
           if (currIndex < 0) drawDealerCards(); 
@@ -275,7 +277,7 @@ function drawDealerCards() {
     }
     const scoreToPay = dealer.getScore() > 21 ? 0 : dealer.getScore()
     payToPlayer(scoreToPay);      // Compare the scores and pay them.
-  } 
+  } else updatePlayers();
   dom.dScore.innerText = ' -- score : ' + dealer.getScore();
   dView.openCards(dealer.getOnHand());    // Show dealer's cards.
   // Show the game result in a report box.

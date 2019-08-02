@@ -71,10 +71,13 @@ export const removePlayer = (players, callback) => {
 
 // Collect valid(inPlay==true) players for the game.
 export function gatherActivePlayers(origin) {
-  const players = [];
+  let players = [];
   origin.forEach((p) => {
     if (p.getInPlay()) {
-      players.push(clonePlayer(p)); 
+      if (p.getAmount() < p.getBetting()) {
+        players = [];
+        return;
+      } else players.push(clonePlayer(p)); 
     } else p.setPrevResult("didn't play");
   });
   return [...players];
